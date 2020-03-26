@@ -50,7 +50,7 @@ def procesar(direccion):
     #primera_opcion.show()
     #segunda_opcion.show()
     #tercera_opcion.show()
-    print(titulo_string+"\n"+primera_string+"\n"+segunda_string+"\n"+tercera_string)
+    #print(titulo_string+"\n"+primera_string+"\n"+segunda_string+"\n"+tercera_string)
     
     pregunta = titulo_string
     respuestas = set()
