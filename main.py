@@ -42,4 +42,4 @@ texto = definitivo.lower()
 contarCoincidencias(texto, lista_palabras)
 
 #########################################FIN########################################
-print("Tardó", time()-start)
+print("Tardó mucho", time()-start)
