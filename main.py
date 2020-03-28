@@ -78,21 +78,22 @@ def busquedaShazam():
     coincidencias(definitivo,lista_palabras)
     
 #start = time()
-def main():
-    while(True):
-        try:
-            n = int(input("Bienvenido señor, espero órdenes"))
-        except:
-            continue
-        if n == 0:
-            os.system("cls")
-            input("Hasta luego señor")
-            break
-        elif n == 1:
-            busquedaPregunta()
-        elif n == 2:
-            busquedaImagen()
-        elif n == 3:
-            busquedaShazam()
-        input()
+print("HOLA")
+while True:
+    try:
+        n = int(input("Bienvenido señor, espero órdenes"))
+    except:
+        continue
+    if n == 0:
         os.system("cls")
+        input("Hasta luego señor")
+        break
+    elif n == 1:
+        busquedaPregunta()
+    elif n == 2:
+        busquedaImagen()
+    elif n == 3:
+        busquedaShazam()
+    input()
+    os.system("cls")
+        
