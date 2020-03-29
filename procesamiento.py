@@ -34,7 +34,7 @@ def procesar():
     ret, thresh1 = cv2.threshold(I, 150, 255, cv2.THRESH_BINARY)
     I = thresh1
     a=Image.fromarray(I.astype(np.uint8))
-    a.show()
+    #a.show()
     titulo = I[130:280,18:360]
     primera_opcion = I[280:345,18:260]
     segunda_opcion = I[345:418,18:260]

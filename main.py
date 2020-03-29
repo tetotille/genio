@@ -58,6 +58,7 @@ def busquedaPregunta():
     print(titulo_string)
     palabra_clave=palabraClave(titulo_string)
     definitivo = busqueda(titulo_string,palabra_clave)
+    print(definitivo)
     coincidencias(definitivo,lista_palabras)
 
 def busquedaImagen():
@@ -78,10 +79,9 @@ def busquedaShazam():
     coincidencias(definitivo,lista_palabras)
 
 #start = time()
-print("HOLA")
 while True:
     try:
-        n = int(input("Bienvenido señor, espero órdenes"))
+        n = int(input("\nBienvenido señor, espero órdenes\n1: Buscar pregunta\n2: Buscar imagen\n3: Buscar Shazam\n0:Salir\n\nOpción: "))
     except:
         continue
     if n == 0:
