@@ -29,25 +29,25 @@ def procesar():
     screenshot = pyautogui.screenshot(region=(988, 55, 371, 596))
     screenshot.save('screenshot'+str(time())+'.png')
     I = np.asarray(screenshot,dtype=np.float32)
-    I = cv2.resize(I, (540,1170), interpolation = cv2.INTER_AREA)
+    #I = cv2.resize(I, (540,1170), interpolation = cv2.INTER_AREA)
     I=cv2.cvtColor(I, cv2.COLOR_BGR2GRAY)
-    ret, thresh1 = cv2.threshold(I, 145, 255, cv2.THRESH_BINARY)
+    ret, thresh1 = cv2.threshold(I, 150, 255, cv2.THRESH_BINARY)
     I = thresh1
     a=Image.fromarray(I.astype(np.uint8))
     a.show()
-    titulo = I[445:593,44:497]
-    primera_opcion = I[598:692,68:475]
-    segunda_opcion = I[652:750,45:491]
-    tercera_opcion = I[751:849,44:493]
+    titulo = I[130:280,18:360]
+    primera_opcion = I[280:345,18:260]
+    segunda_opcion = I[345:418,18:260]
+    tercera_opcion = I[418:494,18:260]
 
     a = formatoImpresion(I)
 
-    titulo_string = pytesseract.image_to_string(titulo)
+    titulo_string = pytesseract.image_to_string(titulo, lang = 'spa')
     if titulo_string[0]=="é" or titulo_string[0]=="@":
         titulo_string=""+titulo_string[1:-1]+""
 
-    primera_string = pytesseract.image_to_string(primera_opcion)
-    segunda_string = pytesseract.image_to_string(segunda_opcion)
-    tercera_string = pytesseract.image_to_string(tercera_opcion)
+    primera_string = pytesseract.image_to_string(primera_opcion, lang = 'spa')
+    segunda_string = pytesseract.image_to_string(segunda_opcion, lang = 'spa')
+    tercera_string = pytesseract.image_to_string(tercera_opcion, lang = 'spa')
 
     return titulo_string, [primera_string,segunda_string,tercera_string]
