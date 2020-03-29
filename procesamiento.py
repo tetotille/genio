@@ -41,8 +41,6 @@ def procesar():
 
     a = formatoImpresion(I)
 
-    pytesseract.pytesseract.tesseract_cmd = r'C:\Users\teto_\AppData\Local\Tesseract-OCR\tesseract.exe'
-
     titulo_string = pytesseract.image_to_string(titulo)
     if titulo_string[0]=="é" or titulo_string[0]=="@":
         titulo_string=""+titulo_string[1:-1]+""
