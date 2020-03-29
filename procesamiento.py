@@ -23,7 +23,7 @@ def formatoImpresion(imagen):
     return Image.fromarray(imagen.astype(np.uint8))
 ##Para guardar
 #I.save("Nombre.jpg")
-start = time()
+#start = time()
 ##################MAIN################
 screenshot = pyautogui.screenshot(region=(532, 75, 300, 650))
 #screenshot.show()
@@ -42,10 +42,10 @@ tercera_opcion = I[751:849,44:493]
 
 a = formatoImpresion(I)
 #a.show()
-titulo=formatoImpresion(titulo)
-primera_opcion=formatoImpresion(primera_opcion)
-segunda_opcion=formatoImpresion(segunda_opcion)
-tercera_opcion=formatoImpresion(tercera_opcion)
+#titulo=formatoImpresion(titulo)
+#primera_opcion=formatoImpresion(primera_opcion)
+#segunda_opcion=formatoImpresion(segunda_opcion)
+#tercera_opcion=formatoImpresion(tercera_opcion)
 #I = formatoImpresion(I)
 
 #I.show()
@@ -66,12 +66,7 @@ print("3. "+tercera_string)
 #primera_opcion.show()
 #segunda_opcion.show()
 #tercera_opcion.show()
-
-
-
-I = formatoImpresion(I)
-
 #######################FIN###########################
-elapsed = time()-start
-print("\n")
-print(elapsed)
+#elapsed = time()-start
+#print("\n")
+#print(elapsed)

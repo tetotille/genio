@@ -11,8 +11,7 @@ import os
 
 ########################################PROCESAMIENTO DE IMAGEN#########################
 def procesamientoImagen():
-    screenshot = pyautogui.screenshot(region=(1089, 210, 277, 440))
-    titulo_string, lista_palabras=procesar(screenshot)
+    titulo_string, lista_palabras=procesar()
     return titulo_string,lista_palabras
 ########################################PALABRA CLAVE##############################
 #falta agregar una función que elija lo que haya que buscar
@@ -76,7 +75,7 @@ def busquedaShazam():
     definitivo = busqueda(titulo_string,palabra_clave)
     print(definitivo)
     coincidencias(definitivo,lista_palabras)
-    
+
 #start = time()
 print("HOLA")
 while True:
@@ -96,4 +95,3 @@ while True:
         busquedaShazam()
     input()
     os.system("cls")
-        
