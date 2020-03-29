@@ -78,7 +78,7 @@ def busquedaShazam():
     coincidencias(definitivo,lista_palabras)
 
 #start = time()
-print("HOLA")
+#print("HOLA")
 while True:
     try:
         n = int(input("Bienvenido señor, espero órdenes"))

@@ -4,7 +4,7 @@ def contarCoincidencias(texto, lista_palabras):
         letras = len(pal)
         cont = -1
         acu = 0
-
+        pal = pal.lower()
         while b !=-1:
             b = texto[acu:len(texto)].find(pal)
             cont+=1
