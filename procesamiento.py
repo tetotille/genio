@@ -26,7 +26,8 @@ def formatoImpresion(imagen):
 #start = time()
 ##################MAIN################
 def procesar():
-    screenshot = pyautogui.screenshot(region=(532, 75, 300, 650))
+    screenshot = pyautogui.screenshot(region=(988, 55, 371, 596))
+    screenshot.save('screenshot'+str(time())+'.png')
     I = np.asarray(screenshot,dtype=np.float32)
     I = cv2.resize(I, (540,1170), interpolation = cv2.INTER_AREA)
     I=cv2.cvtColor(I, cv2.COLOR_BGR2GRAY)
