@@ -25,48 +25,30 @@ def formatoImpresion(imagen):
 #I.save("Nombre.jpg")
 #start = time()
 ##################MAIN################
-screenshot = pyautogui.screenshot(region=(532, 75, 300, 650))
-#screenshot.show()
-I = np.asarray(screenshot,dtype=np.float32)
-I = cv2.resize(I, (540,1170), interpolation = cv2.INTER_AREA)
-#I = cv2.imread("imagen1.jpeg")
-I=cv2.cvtColor(I, cv2.COLOR_BGR2GRAY)
-ret, thresh1 = cv2.threshold(I, 145, 255, cv2.THRESH_BINARY)
-I = thresh1
-a=Image.fromarray(I.astype(np.uint8))
-a.show()
-titulo = I[445:593,44:497]
-primera_opcion = I[598:692,68:475]
-segunda_opcion = I[652:750,45:491]
-tercera_opcion = I[751:849,44:493]
+def procesar():
+    screenshot = pyautogui.screenshot(region=(532, 75, 300, 650))
+    I = np.asarray(screenshot,dtype=np.float32)
+    I = cv2.resize(I, (540,1170), interpolation = cv2.INTER_AREA)
+    I=cv2.cvtColor(I, cv2.COLOR_BGR2GRAY)
+    ret, thresh1 = cv2.threshold(I, 145, 255, cv2.THRESH_BINARY)
+    I = thresh1
+    a=Image.fromarray(I.astype(np.uint8))
+    a.show()
+    titulo = I[445:593,44:497]
+    primera_opcion = I[598:692,68:475]
+    segunda_opcion = I[652:750,45:491]
+    tercera_opcion = I[751:849,44:493]
 
-a = formatoImpresion(I)
-#a.show()
-#titulo=formatoImpresion(titulo)
-#primera_opcion=formatoImpresion(primera_opcion)
-#segunda_opcion=formatoImpresion(segunda_opcion)
-#tercera_opcion=formatoImpresion(tercera_opcion)
-#I = formatoImpresion(I)
+    a = formatoImpresion(I)
 
-#I.show()
+    pytesseract.pytesseract.tesseract_cmd = r'C:\Users\teto_\AppData\Local\Tesseract-OCR\tesseract.exe'
 
-pytesseract.pytesseract.tesseract_cmd = r'C:\Users\teto_\AppData\Local\Tesseract-OCR\tesseract.exe'
+    titulo_string = pytesseract.image_to_string(titulo)
+    if titulo_string[0]=="é" or titulo_string[0]=="@":
+        titulo_string=""+titulo_string[1:-1]+""
 
-titulo_string = pytesseract.image_to_string(titulo)
-if titulo_string[0]=="é":
-    titulo_string="¿"+titulo_string[1:-1]+"?"
-print(titulo_string)
-primera_string = pytesseract.image_to_string(primera_opcion)
-print("1. "+primera_string)
-segunda_string = pytesseract.image_to_string(segunda_opcion)
-print("2. "+segunda_string)
-tercera_string = pytesseract.image_to_string(tercera_opcion)
-print("3. "+tercera_string)
-#titulo.show()
-#primera_opcion.show()
-#segunda_opcion.show()
-#tercera_opcion.show()
-#######################FIN###########################
-#elapsed = time()-start
-#print("\n")
-#print(elapsed)
+    primera_string = pytesseract.image_to_string(primera_opcion)
+    segunda_string = pytesseract.image_to_string(segunda_opcion)
+    tercera_string = pytesseract.image_to_string(tercera_opcion)
+
+    return titulo_string, [primera_string,segunda_string,tercera_string]
