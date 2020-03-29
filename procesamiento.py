@@ -46,8 +46,8 @@ def procesar():
     if titulo_string[0]=="é" or titulo_string[0]=="@":
         titulo_string=""+titulo_string[1:-1]+""
 
-    primera_string = pytesseract.image_to_string(primera_opcion, lang = 'spa')
-    segunda_string = pytesseract.image_to_string(segunda_opcion, lang = 'spa')
-    tercera_string = pytesseract.image_to_string(tercera_opcion, lang = 'spa')
+    primera_string = pytesseract.image_to_string(primera_opcion, lang = 'spa').lower()
+    segunda_string = pytesseract.image_to_string(segunda_opcion, lang = 'spa').lower()
+    tercera_string = pytesseract.image_to_string(tercera_opcion, lang = 'spa').lower()
 
     return titulo_string, [primera_string,segunda_string,tercera_string]

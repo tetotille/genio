@@ -16,7 +16,7 @@ from fake_useragent import UserAgent
 from urllib.parse import urlencode
 
 
-def _get_search_url(query, page=0, per_page=10, lang='en', area='com', ncr=False, time_period=False, sort_by_date=False):
+def _get_search_url(query, page=0, per_page=25, lang='sp', area='com.py', ncr=False, time_period=False, sort_by_date=False):
     # note: num per page might not be supported by google anymore (because of
     # google instant)
 
@@ -405,7 +405,7 @@ def _get_search_url(query, page=0, per_page=10, lang='en', area='com', ncr=False
 
 
 def get_html(url):
-    
+
     ua = UserAgent()
     header = ua.random
 
@@ -417,7 +417,7 @@ def get_html(url):
         html = urllib.request.urlopen(request).read()#depende de la velocidad del internet
         #elapsed6 = time()-start6
         #print("depende de la velocidad del internet "+str(elapsed6))
-        
+
         return html
     except urllib.error.HTTPError as e:
         print("Error accessing:", url)
@@ -485,7 +485,7 @@ def search(query, pages=1, lang='es', area='com', ncr=False, void=True, time_per
 
     results = []
     for i in range(first_page, first_page + pages):
-        
+
         url = _get_search_url(query, i, lang=lang, area=area, ncr=ncr, time_period=time_period, sort_by_date=sort_by_date)
         html = get_html(url)
         if html:
@@ -646,4 +646,3 @@ def _get_number_of_results(results_div):
             return results
     except Exception as e:
         return 0
-        
