@@ -62,7 +62,7 @@ def coincidencias(definitivo,lista_palabras):
     texto = definitivo.lower()
     contarCoincidencias(texto, lista_palabras)
 
-nombre = '1585549645.3734639.jpg'
+nombre = '1585550839.7763247.jpg'
 img = Image.open('./screens/' + nombre)
 pregunta, opciones = procesar(img)
 pregunta = pregunta.replace("\n"," ")

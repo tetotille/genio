@@ -19,18 +19,26 @@ def procesamientoImagen():
 #falta agregar una función que elija lo que haya que buscar
 def palabraClave(titulo_string):
     a = titulo_string.find('"')
-    if a == -1: a = titulo_string.find('“')
+    tamaño = len(titulo_string)
+    if a == -1:
+        a = titulo_string.find('“')
+        if a == -1:
+            a = titulo_string.find('«')
     if a != -1:
-        a2 = titulo_string[a+1:-1].find('"')
+        a2 = titulo_string[a+1:tamaño].find('"')
         if a2 == -1:
-            a2 = titulo_string[a+1:-1].find('”')+a+1
+            a2 = titulo_string[a+1:tamaño].find('”')
+            if a2 == -1:
+                a2 = titulo_string[a+1:tamaño].find('»')+a+1
+            else:
+                a2+=a+1
         else:
-            a2 +=a
+            a2 +=a+1
         palabra_clave = '"'+titulo_string[a+1:a2]+'"'
         palabra_clave = palabra_clave.replace("\n"," ")
     elif not titulo_string[2:-1].islower():
         aux = ""
-        for i in range(2,len(titulo_string)):
+        for i in range(3,len(titulo_string)):
             letra = titulo_string[i]
             if letra.isupper():
                 j = i
@@ -48,9 +56,9 @@ def palabraClave(titulo_string):
     else:
         palabra_clave = titulo_string
     if " NO " in titulo_string:
-        palabra_clave = palabra_clave.replace( ' "NO" "O"'," ")
-        print("\nNO")
+        palabra_clave = palabra_clave.replace( ' "NO" "O"',' ')
     return palabra_clave
+
 ########################################BUSQUEDA####################################
 def busqueda(titulo_string,palabra_clave):
     resultados = search(palabra_clave, 1)
@@ -97,7 +105,7 @@ def busquedaShazam():
 #print("HOLA")
 while True:
     try:
-        n = int(input("Bienvenido señor, espero órdenes"))
+        n = int(input("Bienvenido señor, espero órdenes\n1.Busqueda Pregunta\n2.Busqueda Imagen\n3.Busqueda Shazam\n"))
     except:
         continue
     if n == 0:
