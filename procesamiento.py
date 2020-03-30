@@ -52,9 +52,9 @@ def procesar(screenshot):
 #    a.show()
     pytesseract.pytesseract.tesseract_cmd = r'C:\Users\teto_\AppData\Local\Tesseract-OCR\tesseract.exe'
 
-    titulo_string = pytesseract.image_to_string(titulo)
-    if titulo_string[0]=="é" or titulo_string[0]=="@" or titulo_string[0] == "2":
-        titulo_string=""+titulo_string[1:-1]+""
+    pregunta = pytesseract.image_to_string(titulo)
+    if pregunta[0]=="é" or pregunta[0]=="@" or pregunta[0] == "2":
+        pregunta=""+pregunta[1:-1]+""
 
     primera_string = pytesseract.image_to_string(primera_opcion).lower()
     segunda_string = pytesseract.image_to_string(segunda_opcion).lower()
@@ -65,4 +65,4 @@ def procesar(screenshot):
         segunda_string = str(numerodic[segunda_string])
     if tercera_string in numerodic:
         tercera_string = str(numerodic[tercera_string])
-    return titulo_string, [primera_string,segunda_string,tercera_string]
+    return pregunta, [primera_string,segunda_string,tercera_string]
