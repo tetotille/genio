@@ -6,9 +6,15 @@ from PIL import Image
 
 def palabraClave(titulo_string):
     a = titulo_string.find('"')
+    if a == -1: a = titulo_string.find('“')
     if a != -1:
-        a2 = titulo_string[a+1:-1].find('"')+a
-        palabra_clave = titulo_string[a+1:a2]
+        a2 = titulo_string[a+1:-1].find('"')
+        if a2 == -1:
+            a2 = titulo_string[a+1:-1].find('”')+a+1
+        else:
+            a2 +=a
+        palabra_clave = '"'+titulo_string[a+1:a2]+'"'
+        palabra_clave = palabra_clave.replace("\n"," ")
     elif not titulo_string[2:-1].islower():
         aux = ""
         for i in range(3,len(titulo_string)):
@@ -20,7 +26,7 @@ def palabraClave(titulo_string):
                     i = i + j
                 else:
                     i = len(titulo_string)
-                aux = aux+" "+titulo_string[j:i]
+                aux = aux+' "'+titulo_string[j:i]+'"'
         palabra_clave = aux
     elif "el" in titulo_string.lower() and "es":
         a = titulo_string.lower().find("el")
@@ -34,6 +40,7 @@ def busqueda(titulo_string,palabra_clave):
     resultados = search(palabra_clave, 1)
     definitivo = ""
     for resul in resultados:
+        definitivo += resul.name
         definitivo = definitivo+resul.description
     return definitivo
 
@@ -45,7 +52,7 @@ def coincidencias(definitivo,lista_palabras):
     texto = definitivo.lower()
     contarCoincidencias(texto, lista_palabras)
 
-nombre = '1585545189.148222.jpg'
+nombre = '1585546578.8814008.jpg'
 img = Image.open('./screens/' + nombre)
 pregunta, opciones = procesar(img)
 
