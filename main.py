@@ -4,84 +4,60 @@ from search import search
 from coincidencias import contarCoincidencias
 import pyautogui
 import os
-
+from clave import palabraClave
 
 
 
 
 ########################################PROCESAMIENTO DE IMAGEN#########################
 def procesamientoImagen():
-    titulo_string, lista_palabras=procesar()
-    return titulo_string,lista_palabras
-########################################PALABRA CLAVE##############################
-#falta agregar una función que elija lo que haya que buscar
-def palabraClave(titulo_string):
-    a = titulo_string.find('"')
-    if a != -1:
-        a2 = titulo_string[a+1:-1].find('"')+a
-        palabra_clave = titulo_string[a+1:a2]
-    elif not titulo_string[2:-1].islower():
-        aux = ""
-        for i in range(len(titulo_string[2:-1])):
-            letra = titulo_string[i+2]
-            if letra.isupper():
-                j = i
-                i = titulo_string.find(" ")
-                aux = aux+titulo_string[j:i]
-        palabra_clave = aux
-    elif "el" in titulo_string.lower() and "es":
-        a = titulo_string.lower().find("el")
-        b = titulo_string.find("es")
-        palabra_clave = titulo_string[a+3:b-1]
-    else:
-        palabra_clave = titulo_string
-    return palabra_clave
+    pregunta, respuestas=procesar()
+    return pregunta,respuestas
+
 ########################################BUSQUEDA####################################
-def busqueda(titulo_string,palabra_clave):
-    resultados = search(palabra_clave, 1)
+def busqueda(palabras_claves):
+    resultados = search(palabras_claves, 1)
     definitivo = ""
-    for resul in resultados:
-        definitivo = definitivo+resul.description
+    for resultado in resultados:
+        definitivo = definitivo+resultado.description
     return definitivo
 
 ##########################################COINCIDENCIAS##############################
-def coincidencias(definitivo,lista_palabras):
+def coincidencias(definitivo,respuestas):
     texto = definitivo.lower()
-    contarCoincidencias(texto, lista_palabras)
+    contarCoincidencias(texto, respuestas)
 
 #########################################FIN########################################
 
 
-
+########################################FUNCIONES DEL MAIN##############################
 def busquedaPregunta():
-    titulo_string,lista_palabras = procesamientoImagen()
-    print(titulo_string)
-    palabra_clave=palabraClave(titulo_string)
-    definitivo = busqueda(titulo_string,palabra_clave)
-    coincidencias(definitivo,lista_palabras)
+    pregunta,respuestas = procesamientoImagen()#Llama a la IA que procesa la imagen y lo transforma en texto
+    palabras_claves=palabraClave(pregunta)#busca las palabras claves a buscar se puede obviar esta parte y buscar solo la pregunta
+    definitivo = busqueda(palabras_claves)#realiza la búsqueda en google
+    coincidencias(definitivo,respuestas)#cuenta e imprime las coincidencias de respuestas generadas
 
 def busquedaImagen():
     screenshot = pyautogui.screenshot(region=(1089, 210, 277, 440))
     definitivo=googleImages(screenshot)#falta implementar
     input("\npresione para hacer screenshot\n")
-    titulo_string,lista_palabras = procesamientoImagen()
-    coincidencias(definitivo,lista_palabras)
+    pregunta,respuestas = procesamientoImagen()
+    coincidencias(definitivo,respuestas)
 
-def busquedaShazam():
-    palabra_clave = input("\nEscriba la palabra clave\n")
+def busquedaManual():
+    palabras_claves = input("\nEscriba la palabra clave\n")
     try:
-        titulo_string,lista_palabras = procesamientoImagen()
+        pregunta,respuestas = procesamientoImagen()
     except:
         pass
-    definitivo = busqueda(titulo_string,palabra_clave)
+    definitivo = busqueda(palabras_claves)
     print(definitivo)
-    coincidencias(definitivo,lista_palabras)
+    coincidencias(definitivo,respuestas)
 
-#start = time()
-print("HOLA")
+##############################MAIN####################################
 while True:
-    try:
-        n = int(input("Bienvenido señor, espero órdenes"))
+    try:#Pregunta la opcion que se quiere
+        n = int(input("Bienvenido señor, espero órdenes\n1.Búsqueda Automática\n2.Busqueda de Imagen\n3.Búsqueda Manual"))
     except:
         continue
     if n == 0:
@@ -93,6 +69,6 @@ while True:
     elif n == 2:
         busquedaImagen()
     elif n == 3:
-        busquedaShazam()
+        busquedaManual()
     input()
     os.system("cls")
