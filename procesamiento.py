@@ -25,10 +25,11 @@ def formatoImpresion(imagen):
 #I.save("Nombre.jpg")
 #start = time()
 ##################MAIN################
-def procesar():
-    screenshot = pyautogui.screenshot(region=(988, 55, 371, 596))
-    screenshot.save('screenshot'+str(time())+'.png')
-    I = np.asarray(screenshot,dtype=np.float32)
+def procesar(I = None):
+    if I is None:
+        screenshot = pyautogui.screenshot(region=(988, 55, 371, 596))
+        screenshot.save('screenshot'+str(time())+'.png')
+        I = np.asarray(screenshot,dtype=np.float32)
     #I = cv2.resize(I, (540,1170), interpolation = cv2.INTER_AREA)
     I=cv2.cvtColor(I, cv2.COLOR_BGR2GRAY)
     ret, thresh1 = cv2.threshold(I, 150, 255, cv2.THRESH_BINARY)
