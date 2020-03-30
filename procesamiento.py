@@ -33,7 +33,7 @@ def procesar(screenshot):
     I = np.asarray(screenshot,dtype=np.float32)
     I = cv2.resize(I, (540,1170), interpolation = cv2.INTER_AREA)
     I=cv2.cvtColor(I, cv2.COLOR_BGR2GRAY)
-    ret, thresh1 = cv2.threshold(I, 140, 255, cv2.THRESH_BINARY)
+    ret, thresh1 = cv2.threshold(I, 135, 255, cv2.THRESH_BINARY)
     I = thresh1
 
     titulo = I[445:593,44:497]

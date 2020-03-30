@@ -6,13 +6,21 @@ from PIL import Image
 
 def palabraClave(titulo_string):
     a = titulo_string.find('"')
-    if a == -1: a = titulo_string.find('“')
+    tamaño = len(titulo_string)
+    if a == -1:
+        a = titulo_string.find('“')
+        if a == -1:
+            a = titulo_string.find('«')
     if a != -1:
-        a2 = titulo_string[a+1:-1].find('"')
+        a2 = titulo_string[a+1:tamaño].find('"')
         if a2 == -1:
-            a2 = titulo_string[a+1:-1].find('”')+a+1
+            a2 = titulo_string[a+1:tamaño].find('”')
+            if a2 == -1:
+                a2 = titulo_string[a+1:tamaño].find('»')+a+1
+            else:
+                a2+=a+1
         else:
-            a2 +=a
+            a2 +=a+1
         palabra_clave = '"'+titulo_string[a+1:a2]+'"'
         palabra_clave = palabra_clave.replace("\n"," ")
     elif not titulo_string[2:-1].islower():
@@ -54,7 +62,7 @@ def coincidencias(definitivo,lista_palabras):
     texto = definitivo.lower()
     contarCoincidencias(texto, lista_palabras)
 
-nombre = '1585548229.7919145.jpg'
+nombre = '1585549645.3734639.jpg'
 img = Image.open('./screens/' + nombre)
 pregunta, opciones = procesar(img)
 pregunta = pregunta.replace("\n"," ")
