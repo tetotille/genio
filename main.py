@@ -11,7 +11,9 @@ import os
 
 ########################################PROCESAMIENTO DE IMAGEN#########################
 def procesamientoImagen():
-    titulo_string, lista_palabras=procesar()
+    screenshot = pyautogui.screenshot(region=(860, 50, 325, 620))
+    screenshot.save("./Screens/"+str(time())+".jpg")
+    titulo_string, lista_palabras=procesar(screenshot)
     return titulo_string,lista_palabras
 ########################################PALABRA CLAVE##############################
 #falta agregar una función que elija lo que haya que buscar
