@@ -18,12 +18,14 @@ def coincidencias(definitivo,lista_palabras):
     texto = definitivo.lower()
     contarCoincidencias(texto, lista_palabras)
 
-img = cv2.imread('./screenshots/screenshot1585519642.6966257.png')
+nombre = 'screenshot1585520322.248481.png'
+img = cv2.imread('./screenshots/' + nombre)
 pregunta, opciones = procesar(img)
 
 print("La pregunta es:\n" + pregunta)
 print("\nOpciones: ")
 for opcion in opciones: print(opcion)
+
 
 print("Respuestas:")
 busquedaPregunta(pregunta, opciones)
