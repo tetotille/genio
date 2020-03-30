@@ -24,12 +24,16 @@ def palabraClave(titulo_string):
         palabra_clave = titulo_string[a+1:a2]
     elif not titulo_string[2:-1].islower():
         aux = ""
-        for i in range(len(titulo_string[2:-1])):
-            letra = titulo_string[i+2]
+        for i in range(2,len(titulo_string)):
+            letra = titulo_string[i]
             if letra.isupper():
                 j = i
-                i = titulo_string.find(" ")
-                aux = aux+titulo_string[j:i]
+                i = titulo_string[j:-1].find(" ")
+                if i != -1:
+                    i = i + j
+                else:
+                    i = len(titulo_string)
+                aux = aux+" "+titulo_string[j:i]
         palabra_clave = aux
     elif "el" in titulo_string.lower() and "es":
         a = titulo_string.lower().find("el")
@@ -57,7 +61,7 @@ def coincidencias(definitivo,lista_palabras):
 
 def busquedaPregunta():
     titulo_string,lista_palabras = procesamientoImagen()
-    print(titulo_string)
+    #print(titulo_string)
     palabra_clave=palabraClave(titulo_string)
     definitivo = busqueda(titulo_string,palabra_clave)
     coincidencias(definitivo,lista_palabras)

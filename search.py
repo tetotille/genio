@@ -496,7 +496,7 @@ def search(query, pages=1, lang='es', area='com', ncr=False, void=True, time_per
     for i in range(first_page, first_page + pages):
 
         url = _get_search_url(query, i, lang=lang, area=area, ncr=ncr, time_period=time_period, sort_by_date=sort_by_date)
-        print(url)
+        #print(url)
         html = get_html(url)
         if html:
             #start = time()

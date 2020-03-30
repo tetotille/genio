@@ -5,6 +5,7 @@ def contarCoincidencias(texto, lista_palabras):
     for pal in lista_palabras:
         b = 0
         cont = -1
+        pal = pal.lower()
         acu = 0
         bandera_ambas = False
         if pal == "ambas" or pal == "ambos": bandera_ambas = True
@@ -24,8 +25,8 @@ def contarCoincidencias(texto, lista_palabras):
                 b = texto[acu:len(texto)].find(palabrita)
                 cont+=1
                 acu+=b+1
-        if not bandera_ambas:print("Palabras por separado =", cont)
+        if not bandera_ambas:print(" PS =", cont)
         acu2_separado +=cont
     if ban_ban:
-        print("\n\n", "ambas"+" = "+str(cont))
-        print("Palabras por separado =", cont)
+        print("\n\n", "AMBAS"+" = "+str(acu2))
+        print(" PS =", acu2_separado)
