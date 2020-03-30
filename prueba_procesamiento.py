@@ -34,6 +34,8 @@ def palabraClave(titulo_string):
         palabra_clave = titulo_string[a+3:b-1]
     else:
         palabra_clave = titulo_string
+    if " NO " in titulo_string:
+        palabra_clave = palabra_clave.replace( ' "NO" "O"',' ')
     return palabra_clave
 
 def busqueda(titulo_string,palabra_clave):
@@ -52,9 +54,10 @@ def coincidencias(definitivo,lista_palabras):
     texto = definitivo.lower()
     contarCoincidencias(texto, lista_palabras)
 
-nombre = '1585546578.8814008.jpg'
+nombre = '1585548229.7919145.jpg'
 img = Image.open('./screens/' + nombre)
 pregunta, opciones = procesar(img)
+pregunta = pregunta.replace("\n"," ")
 
 print("La pregunta es:\n" + pregunta)
 print("\nOpciones: ")
@@ -64,6 +67,8 @@ for opcion in opciones: print(opcion)
 #print("Respuestas:")
 #busquedaPregunta(pregunta, opciones)
 palabra_clave = palabraClave(pregunta)
+#palabra_clave = "viernes 13"
+#opciones = ["9","15","0"]
 print("PALABRA CLAVE: "+palabra_clave)
 definitivo = busqueda(pregunta,palabra_clave)
 contarCoincidencias(definitivo.lower(),opciones)

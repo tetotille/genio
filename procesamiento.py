@@ -12,6 +12,9 @@ import pyocr.builders
 import sys
 
 import cv2
+global numerodic
+numerodic = {"cero":0,"uno":1,"dos":2,"tres":3,"cuatro":4,"cinco":5,"seis":6,
+    "siete":7,"ocho":8,"nueve":9,"diez":10,"once":11,"doce":12,"trece":13,"catorce":14,"quince":15}
 
 def formatoProcesamiento(imagen):
     I1 = imagen.convert('L')
@@ -26,6 +29,7 @@ def formatoImpresion(imagen):
 #start = time()
 ##################MAIN################
 def procesar(screenshot):
+    global numerodic
     I = np.asarray(screenshot,dtype=np.float32)
     I = cv2.resize(I, (540,1170), interpolation = cv2.INTER_AREA)
     I=cv2.cvtColor(I, cv2.COLOR_BGR2GRAY)
@@ -52,8 +56,13 @@ def procesar(screenshot):
     if titulo_string[0]=="é" or titulo_string[0]=="@" or titulo_string[0] == "2":
         titulo_string=""+titulo_string[1:-1]+""
 
-    primera_string = pytesseract.image_to_string(primera_opcion)
-    segunda_string = pytesseract.image_to_string(segunda_opcion)
-    tercera_string = pytesseract.image_to_string(tercera_opcion)
-
+    primera_string = pytesseract.image_to_string(primera_opcion).lower()
+    segunda_string = pytesseract.image_to_string(segunda_opcion).lower()
+    tercera_string = pytesseract.image_to_string(tercera_opcion).lower()
+    if primera_string in numerodic:
+        primera_string = str(numerodic[primera_string])
+    if segunda_string in numerodic:
+        segunda_string = str(numerodic[segunda_string])
+    if tercera_string in numerodic:
+        tercera_string = str(numerodic[tercera_string])
     return titulo_string, [primera_string,segunda_string,tercera_string]

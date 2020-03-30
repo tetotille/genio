@@ -19,6 +19,7 @@ def contarCoincidencias(texto, lista_palabras):
 
         cont = -1
         for palabrita in pal.split():
+            if palabrita == "la": continue
             b = 0
             acu = 0
             while b !=-1:

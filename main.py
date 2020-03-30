@@ -47,6 +47,9 @@ def palabraClave(titulo_string):
         palabra_clave = titulo_string[a+3:b-1]
     else:
         palabra_clave = titulo_string
+    if " NO " in titulo_string:
+        palabra_clave = palabra_clave.replace( ' "NO" "O"'," ")
+        print("\nNO")
     return palabra_clave
 ########################################BUSQUEDA####################################
 def busqueda(titulo_string,palabra_clave):
