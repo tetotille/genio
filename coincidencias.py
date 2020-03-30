@@ -10,3 +10,4 @@ def contarCoincidencias(texto, lista_palabras):
             cont+=1
             acu+=b+1
         print(pal+" = "+str(cont))
+        

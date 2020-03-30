@@ -405,7 +405,7 @@ def _get_search_url(query, page=0, per_page=10, lang='en', area='com', ncr=False
 
 
 def get_html(url):
-    
+
     ua = UserAgent()
     header = ua.random
 
@@ -417,7 +417,7 @@ def get_html(url):
         html = urllib.request.urlopen(request).read()#depende de la velocidad del internet
         #elapsed6 = time()-start6
         #print("depende de la velocidad del internet "+str(elapsed6))
-        
+
         return html
     except urllib.error.HTTPError as e:
         print("Error accessing:", url)
@@ -470,6 +470,15 @@ class GoogleResult(object):
         else:
             return unidecode(str_element)
 
+def _get_search_url_image(query, i, lang, area, ncr, time_period, sort_by_date):
+    url = _get_search_url(query, i, lang=lang, area=area, ncr=ncr, time_period=time_period, sort_by_date=sort_by_date)
+    url.replace("search?","searchbyimage?image_url="+imagepath+"&")
+
+def image_search(imagen, pages = 1, lang='es', area = 'com', ncr = False, void = True, time_period = False, sort_by_date = False, first_page = 0):
+    results = []
+    for i in range(first_page, first_page + pages):
+        url = _get_search_url_image(query, i, lang, area, ncr, time_period, sort_by_date)
+
 
 # PUBLIC
 def search(query, pages=1, lang='es', area='com', ncr=False, void=True, time_period=False, sort_by_date=False, first_page=0):
@@ -485,8 +494,9 @@ def search(query, pages=1, lang='es', area='com', ncr=False, void=True, time_per
 
     results = []
     for i in range(first_page, first_page + pages):
-        
+
         url = _get_search_url(query, i, lang=lang, area=area, ncr=ncr, time_period=time_period, sort_by_date=sort_by_date)
+        print(url)
         html = get_html(url)
         if html:
             #start = time()
@@ -646,4 +656,3 @@ def _get_number_of_results(results_div):
             return results
     except Exception as e:
         return 0
-        
