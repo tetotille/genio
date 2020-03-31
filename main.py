@@ -19,6 +19,9 @@ def procesamientoImagen():
         os.mkdir("./screens/"+time.strftime("%d-%m-%y"))
         screenshot.save("./screens/"+time.strftime("%d-%m-%y")+"/"+str(time.time())+".png")
     pregunta, respuestas=procesar(screenshot)
+    print("La pregunta es:\n" + pregunta)
+    print("\nOpciones: ")
+    for respuesta in respuestas: print(respuesta)
     return pregunta,respuestas
 
 ########################################BUSQUEDA####################################
@@ -58,6 +61,7 @@ def queryImages(screenshot):
 def busquedaPregunta():
     pregunta,respuestas = procesamientoImagen()
     palabras_claves=palabraClave(pregunta)
+    print("PALABRA CLAVE: "+palabras_claves)
     query = busqueda(pregunta,palabras_claves)
     coincidencias(query,respuestas)
 
