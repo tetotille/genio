@@ -19,16 +19,16 @@ def procesamientoImagen():
 ########################################BUSQUEDA####################################
 def busqueda(pregunta,palabras_claves):
     resultados = search(palabras_claves, 1)
-    google = ""
+    query = ""
     for resultado in resultados:
-        google+=resultado.name
-        google+=resultado.description
-    return google
+        query+=resultado.name
+        query+=resultado.description
+    return query
 
 ##########################################COINCIDENCIAS##############################
-def coincidencias(google,respuestas):
-    goole_min = google.lower()
-    contarCoincidencias(google_min, respuestas)
+def coincidencias(query,respuestas):
+    goole_min = query.lower()
+    contarCoincidencias(query_min, respuestas)
 
 #########################################FIN########################################
 
@@ -37,15 +37,15 @@ def coincidencias(google,respuestas):
 def busquedaPregunta():
     pregunta,respuestas = procesamientoImagen()
     palabras_claves=palabraClave(pregunta)
-    google = busqueda(pregunta,palabras_claves)
-    coincidencias(google,respuestas)
+    query = busqueda(pregunta,palabras_claves)
+    coincidencias(query,respuestas)
 
 def busquedaImagen():
     screenshot = pyautogui.screenshot(region=(1089, 210, 277, 440))
-    google=googleImages(screenshot)#falta implementar
+    query=queryImages(screenshot)#falta implementar
     input("\npresione para hacer screenshot\n")
     pregunta,respuestas = procesamientoImagen()
-    coincidencias(google,respuestas)
+    coincidencias(query,respuestas)
 
 def busquedaManual():
     palabras_claves = input("\nEscriba la palabra clave\n")
@@ -53,9 +53,9 @@ def busquedaManual():
         pregunta,respuestas = procesamientoImagen()
     except:
         pass
-    google = busqueda(pregunta,palabras_claves)
-    print(google)
-    coincidencias(google,respuestas)
+    query = busqueda(pregunta,palabras_claves)
+    print(query)
+    coincidencias(query,respuestas)
 
 
 while True:
