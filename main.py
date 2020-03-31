@@ -1,11 +1,11 @@
 from procesamiento import procesar
-from time import time
+
 from search import search
 from search import reverse_search
 from coincidencias import contarCoincidencias
 import pyautogui
 import os
-
+import time
 from clave import palabraClave
 
 
@@ -13,7 +13,11 @@ from clave import palabraClave
 ########################################PROCESAMIENTO DE IMAGEN#########################
 def procesamientoImagen():
     screenshot = pyautogui.screenshot(region=(860, 50, 325, 620))
-    screenshot.save("./Screens/"+str(time())+".png")
+    try:
+        screenshot.save("./screens/"+time.strftime("%d-%m-%y")+"/"+str(time.time())+".png")
+    except:
+        os.mkdir("./screens/"+time.strftime("%d-%m-%y"))
+        screenshot.save("./screens/"+time.strftime("%d-%m-%y")+"/"+str(time.time())+".png")
     pregunta, respuestas=procesar(screenshot)
     return pregunta,respuestas
 
@@ -33,8 +37,13 @@ def coincidencias(query,respuestas):
 
 #########################################BUSQUEDA A TRAVES DE IMAGENES#######################
 def queryImages(screenshot):
-    direccion = "./imagenes/"+str(time())+".png"
-    screenshot.save(direccion)
+    dia = str(time.strftime("%d-%m-%y"))
+    direccion = "./imagenes/"+str(time.time())+".png"
+    try:
+        screenshot.save(direccion)
+    except:
+        os.mkdir("./imagenes/"+time.strftime("%d-%m-%y"))
+        screenshot.save(direccion)
     resultados = reverse_search(direccion)
     query = ""
     for resultado in resultados:
