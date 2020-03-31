@@ -57,7 +57,7 @@ def busquedaManual():
 ##############################MAIN####################################
 while True:
     try:#Pregunta la opcion que se quiere
-        n = int(input("Bienvenido señor, espero órdenes\n1.Búsqueda Automática\n2.Busqueda de Imagen\n3.Búsqueda Manual"))
+        n = int(input("Bienvenido señor, espero órdenes\n1.Búsqueda Automática\n2.Busqueda de Imagen\n3.Búsqueda Manual\n0.Salir\n"))
     except:
         continue
     if n == 0:
