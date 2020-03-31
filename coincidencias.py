@@ -1,12 +1,21 @@
-def contarCoincidencias(texto, respuestas):
-    for respuesta in respuestas:
+def contarCoincidencias(texto, lista_palabras):
+    for pal in lista_palabras:
         b = 0
-        letras = len(respuesta)
-        contador = -1
-        acumulador = 0
+        cont = -1
+        acu = 0
 
         while b !=-1:
-            b = texto[acumulador:len(texto)].find(respuesta)
-            contador+=1
-            acumulador+=b+1
-        print(respuesta+" = "+str(contador))
+            b = texto[acu:len(texto)].find(pal)
+            cont+=1
+            acu+=b+1
+        print("\n\n", pal+" = "+str(cont))
+
+        cont = -1
+        for palabrita in pal.split():
+            b = 0
+            acu = 0
+            while b !=-1:
+                b = texto[acu:len(texto)].find(palabrita)
+                cont+=1
+                acu+=b+1
+        print("Palabras por separado =", cont)
