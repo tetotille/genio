@@ -49,6 +49,22 @@ def coincidencias(definitivo,lista_palabras):
     texto = definitivo.lower()
     contarCoincidencias(texto, lista_palabras)
 
+####################################BUSQUEDA A TRAVES DE IMAGENES#########################
+def queryImages(screenshot):
+    dia = str(time.strftime("%d-%m-%y"))
+    direccion = "./imagenes/"+str(time.time())+".png"
+    try:
+        screenshot.save(direccion)
+    except:
+        os.mkdir("./imagenes/"+time.strftime("%d-%m-%y"))
+        screenshot.save(direccion)
+    resultados = reverse_search(direccion)
+    query = ""
+    for resultado in resultados:
+        query+=resultado.name
+        query+=resultado.description
+    return query
+
 #########################################FIN########################################
 
 
