@@ -7,18 +7,18 @@ from clave import palabraClave
 
 def busqueda(pregunta,palabras_claves):
     resultados = search(palabras_claves, 1)
-    definitivo = ""
+    google = ""
     for resul in resultados:
-        definitivo += resul.name
-        definitivo = definitivo+resul.description
-    return definitivo
+        google += resul.name
+        google = google+resul.description
+    return google
 
 def busquedaPregunta(pregunta = None, lista_palabras = None):
-    definitivo = busqueda(pregunta,pregunta)
-    coincidencias(definitivo,lista_palabras)
+    google = busqueda(pregunta,pregunta)
+    coincidencias(google,lista_palabras)
 
-def coincidencias(definitivo,lista_palabras):
-    texto = definitivo.lower()
+def coincidencias(google,lista_palabras):
+    texto = google.lower()
     contarCoincidencias(texto, lista_palabras)
 
 nombre = '1585550839.7763247.jpg'
@@ -37,5 +37,5 @@ palabras_claves = palabraClave(pregunta)
 #palabras_claves = "viernes 13"
 #opciones = ["9","15","0"]
 print("PALABRA CLAVE: "+palabras_claves)
-definitivo = busqueda(pregunta,palabras_claves)
-contarCoincidencias(definitivo.lower(),opciones)
+google = busqueda(pregunta,palabras_claves)
+contarCoincidencias(google.lower(),opciones)
