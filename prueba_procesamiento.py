@@ -2,6 +2,7 @@ from procesamiento import procesar
 import cv2
 from search import search
 from coincidencias import contarCoincidencias
+import glob
 
 def busqueda(titulo_string,palabra_clave):
     resultados = search(palabra_clave, 1)
@@ -18,14 +19,13 @@ def coincidencias(definitivo,lista_palabras):
     texto = definitivo.lower()
     contarCoincidencias(texto, lista_palabras)
 
-nombre = 'screenshot1585520322.248481.png'
-img = cv2.imread('./screenshots/' + nombre)
-pregunta, opciones = procesar(img)
+images = [cv2.imread(file) for file in glob.glob("./screenshots/*.png")]
 
-print("La pregunta es:\n" + pregunta)
-print("\nOpciones: ")
-for opcion in opciones: print(opcion)
-
-
-print("Respuestas:")
-busquedaPregunta(pregunta, opciones)
+for img in images:
+    pregunta, opciones = procesar(img)
+    print("\n\n\nLa pregunta es:\n" + pregunta)
+    print("\nOpciones: ")
+    for opcion in opciones: print(opcion)
+    print("Respuestas:")
+    busquedaPregunta(pregunta, opciones)
+print("\n\n\n")
