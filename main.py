@@ -1,5 +1,5 @@
 from procesamiento import procesar
-from time import time
+import time
 from search import search
 from coincidencias import contarCoincidencias
 import pyautogui
@@ -77,8 +77,8 @@ def busquedaPregunta():
     coincidencias(definitivo,lista_palabras)
 
 def busquedaImagen():
-    screenshot = pyautogui.screenshot(region=(1089, 210, 277, 440))
-    definitivo=googleImages(screenshot)#falta implementar
+    screenshot = pyautogui.screenshot(region=(988, 55, 371, 596))
+    definitivo=reverse_search(screenshot)#falta implementar
     input("\npresione para hacer screenshot\n")
     titulo_string,lista_palabras = procesamientoImagen()
     coincidencias(definitivo,lista_palabras)
@@ -93,7 +93,7 @@ def busquedaShazam():
     print(definitivo)
     coincidencias(definitivo,lista_palabras)
 
-#start = time()
+#start = time.time()
 while True:
     try:
         n = int(input("\nBienvenido señor, espero órdenes\n1: Buscar pregunta\n2: Buscar imagen\n3: Buscar Shazam\n0:Salir\n\nOpción: "))
