@@ -14,6 +14,7 @@ from re import match, findall
 from time import time
 from fake_useragent import UserAgent
 from urllib.parse import urlencode
+import requests
 
 
 def _get_search_url(query, page=0, per_page=10, lang='en', area='com', ncr=False, time_period=False, sort_by_date=False):
@@ -470,15 +471,44 @@ class GoogleResult(object):
         else:
             return unidecode(str_element)
 
-def _get_search_url_image(query, i, lang, area, ncr, time_period, sort_by_date):
-    url = _get_search_url(query, i, lang=lang, area=area, ncr=ncr, time_period=time_period, sort_by_date=sort_by_date)
-    url.replace("search?","searchbyimage?image_url="+imagepath+"&")
 
-def image_search(imagen, pages = 1, lang='es', area = 'com', ncr = False, void = True, time_period = False, sort_by_date = False, first_page = 0):
+def reverse_search(filePath, pages = 1, lang='es', area = 'com', ncr = False, void = True, time_period = False, sort_by_date = False, first_page = 0):
     results = []
     for i in range(first_page, first_page + pages):
-        url = _get_search_url_image(query, i, lang, area, ncr, time_period, sort_by_date)
+        searchUrl = 'http://www.google.com/searchbyimage/upload'
+        multipart = {'encoded_image': (filePath, open(filePath, 'rb')), 'image_content': ''}
+        response = requests.post(searchUrl, files=multipart, allow_redirects=False)
+        url = response.headers['Location']
+        html = get_html(url)
+        if html:
+            #start = time()
+            soup = BeautifulSoup(html, "html.parser")
+            divs = soup.findAll("div", attrs={"class": "g"})
+            #results_div = soup.find("div", attrs={"id": "resultStats"})
+            #number_of_results = _get_number_of_results(results_div)
+            #elapsed = time()-start
+            #print(elapsed)
+            j = 0
+            for li in divs:
+                res = GoogleResult()
 
+                res.page = i
+                res.index = j
+
+                res.name = _get_name(li)
+                res.link = _get_link(li)
+                res.google_link = _get_google_link(li)
+                res.description = _get_description(li)
+                res.thumb = _get_thumb()
+                res.cached = _get_cached(li)
+                #res.number_of_results = number_of_results
+
+                if void is True:
+                    if res.description is None:
+                        continue
+                results.append(res)
+                j += 1
+    return results
 
 # PUBLIC
 def search(query, pages=1, lang='es', area='com', ncr=False, void=True, time_period=False, sort_by_date=False, first_page=0):
@@ -496,7 +526,6 @@ def search(query, pages=1, lang='es', area='com', ncr=False, void=True, time_per
     for i in range(first_page, first_page + pages):
 
         url = _get_search_url(query, i, lang=lang, area=area, ncr=ncr, time_period=time_period, sort_by_date=sort_by_date)
-        #print(url)
         html = get_html(url)
         if html:
             #start = time()
