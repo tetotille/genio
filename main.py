@@ -4,7 +4,7 @@ from search import search
 from coincidencias import contarCoincidencias
 import pyautogui
 import os
-
+from search import reverse_search
 
 
 
@@ -78,7 +78,7 @@ def busquedaPregunta():
 
 def busquedaImagen():
     screenshot = pyautogui.screenshot(region=(988, 55, 371, 596))
-    definitivo=reverse_search(screenshot)#falta implementar
+    definitivo=queryImages(screenshot)#falta implementar
     input("\npresione para hacer screenshot\n")
     titulo_string,lista_palabras = procesamientoImagen()
     coincidencias(definitivo,lista_palabras)

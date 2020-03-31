@@ -14,7 +14,7 @@ from re import match, findall
 from time import time
 from fake_useragent import UserAgent
 from urllib.parse import urlencode
-
+import requests
 
 def _get_search_url(query, page=0, per_page=25, lang='sp', area='py', ncr=False, time_period=False, sort_by_date=False):
     # note: num per page might not be supported by google anymore (because of
