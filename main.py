@@ -56,8 +56,7 @@ def busquedaManual():
     query = busqueda(pregunta,palabras_claves)
     print(query)
     coincidencias(query,respuestas)
-
-
+#COMENTARIO
 while True:
     try:
         n = int(input("Bienvenido señor, espero órdenes\n1.Busqueda Automática\n2.Busqueda Imagen\n3.Busqueda Manual\n"))
