@@ -4,9 +4,12 @@ from search import search
 from coincidencias import contarCoincidencias
 from PIL import Image
 from clave import palabraClave
+from time import time
 
 def busqueda(pregunta,palabras_claves):
+    start = time()
     resultados = search(palabras_claves, 1)
+    print(time()-start)
     google = ""
     for resul in resultados:
         google += resul.name
@@ -21,19 +24,24 @@ def coincidencias(google,lista_palabras):
     texto = google.lower()
     contarCoincidencias(texto, lista_palabras)
 
+
 nombre = '1585545189.148222.jpg'
 img = Image.open('./screens/' + nombre)
+
+
 pregunta, opciones = procesar(img)
 pregunta = pregunta.replace("\n"," ")
+
 
 print("La pregunta es:\n" + pregunta)
 print("\nOpciones: ")
 for opcion in opciones: print(opcion)
 
-
-
 palabras_claves = palabraClave(pregunta)
 
 print("PALABRA CLAVE: "+palabras_claves)
+start = time()
 google = busqueda(pregunta,palabras_claves)
+print(time()-start)
 contarCoincidencias(google.lower(),opciones)
+print(time()-start)

@@ -539,15 +539,15 @@ def search(query, pages=1, lang='es', area='com', ncr=False, void=True, time_per
             for li in divs:
                 res = GoogleResult()
 
-                res.page = i
-                res.index = j
+                #res.page = i
+                #res.index = j
 
                 res.name = _get_name(li)
-                res.link = _get_link(li)
-                res.google_link = _get_google_link(li)
+                #res.link = _get_link(li)
+                #res.google_link = _get_google_link(li)
                 res.description = _get_description(li)
-                res.thumb = _get_thumb()
-                res.cached = _get_cached(li)
+                #res.thumb = _get_thumb()
+                #res.cached = _get_cached(li)
                 #res.number_of_results = number_of_results
 
                 if void is True:

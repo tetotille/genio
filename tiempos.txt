@@ -1,0 +1,5 @@
+apertura de imagen 0.02s
+procesamiento de imagen 1.16s
+impresion 0.004s
+palabra clave 0.0s
+google 4.26s

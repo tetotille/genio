@@ -1,5 +1,8 @@
 def palabraClave(pregunta):
+    b = pregunta.find('“')
     a = pregunta.find('"')
+    if b<a:
+        a=b
     tamaño = len(pregunta)
     if a == -1:
         a = pregunta.find('“')
