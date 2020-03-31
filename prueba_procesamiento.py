@@ -21,7 +21,7 @@ def coincidencias(google,lista_palabras):
     texto = google.lower()
     contarCoincidencias(texto, lista_palabras)
 
-nombre = '1585550839.7763247.jpg'
+nombre = '1585545189.148222.jpg'
 img = Image.open('./screens/' + nombre)
 pregunta, opciones = procesar(img)
 pregunta = pregunta.replace("\n"," ")
@@ -31,11 +31,9 @@ print("\nOpciones: ")
 for opcion in opciones: print(opcion)
 
 
-#print("Respuestas:")
-#busquedaPregunta(pregunta, opciones)
+
 palabras_claves = palabraClave(pregunta)
-#palabras_claves = "viernes 13"
-#opciones = ["9","15","0"]
+
 print("PALABRA CLAVE: "+palabras_claves)
 google = busqueda(pregunta,palabras_claves)
 contarCoincidencias(google.lower(),opciones)

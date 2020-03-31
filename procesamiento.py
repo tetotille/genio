@@ -33,23 +33,14 @@ def procesar(screenshot):
     I = np.asarray(screenshot,dtype=np.float32)
     I = cv2.resize(I, (540,1170), interpolation = cv2.INTER_AREA)
     I=cv2.cvtColor(I, cv2.COLOR_BGR2GRAY)
-    ret, thresh1 = cv2.threshold(I, 147, 255, cv2.THRESH_BINARY)
+    ret, thresh1 = cv2.threshold(I, 146, 255, cv2.THRESH_BINARY)
     I = thresh1
-
+    #Image.fromarray(I.astype(np.float32)).show()
     titulo = I[445:593,44:497]
     primera_opcion = I[598:692,68:475]
     segunda_opcion = I[700:794,68:475]
     tercera_opcion = I[794:900,68:475]
 
-#    a = formatoImpresion(I)
-#    a.show()
-#    a = formatoImpresion(titulo)
-#    a.show()
-#    a = formatoImpresion(primera_opcion)
-#    a.show()
-#    a = formatoImpresion(segunda_opcion)
-#    a.show()
-#    a.show()
     pytesseract.pytesseract.tesseract_cmd = r'C:\Users\teto_\AppData\Local\Tesseract-OCR\tesseract.exe'
 
     pregunta = pytesseract.image_to_string(titulo)
