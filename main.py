@@ -57,7 +57,7 @@ def busquedaPregunta():
     titulo_string,lista_palabras = procesamientoImagen()
     palabra_clave=palabraClave(titulo_string)
     print(palabra_clave)
-    definitivo = busqueda(titulo_string,lista_palabras)
+    definitivo = busqueda(titulo_string,titulo_string)
     coincidencias(definitivo,lista_palabras)
 
 def busquedaImagen():
