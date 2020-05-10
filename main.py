@@ -74,11 +74,12 @@ def busquedaImagen():
 
 def busquedaManual():
     palabras_claves = input("\nEscriba la palabra clave\n")
+    query = busqueda("",palabras_claves)
     try:
         pregunta,respuestas = procesamientoImagen()
     except:
         pass
-    query = busqueda(pregunta,palabras_claves)
+
     print(query)
     coincidencias(query,respuestas)
 #COMENTARIO
